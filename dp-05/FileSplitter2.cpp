@@ -1,11 +1,12 @@
 // I: interface
+// 观察者的抽象类
 class IProgress{
 public:
 	virtual void DoProgress(float value)=0;
 	virtual ~IProgress(){}
 };
 
-
+// 被观察对象的类
 class FileSplitter
 {
 	string m_filePath;
@@ -55,5 +56,4 @@ protected:
 			(*itor)->DoProgress(value); //更新进度条
 			itor++;
 		}
-	}
 };

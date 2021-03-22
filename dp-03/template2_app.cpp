@@ -10,7 +10,7 @@ protected:
     }
 };
 
-int main()
+int main(){
 	{
 		// new Application()通过默认构造函数申请动态内存,返回派生类的指针
 		// 派生类的指针可以隐含转换为基类的指针

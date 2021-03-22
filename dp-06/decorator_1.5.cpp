@@ -52,61 +52,76 @@ public:
 };
 
 //扩展操作
-class CryptoFileStream :public FileStream{
+class CryptoFileStream { // :public FileStream{
 public:
+    // !!!用组合替代继承
+    FileStream* stream;
     virtual char Read(int number){
        
         //额外的加密操作...
-        FileStream::Read(number);//读文件流
+        // FileStream::Read(number);//读文件流
+        stream->Read(number);
         
     }
     virtual void Seek(int position){
         //额外的加密操作...
-        FileStream::Seek(position);//定位文件流
+        // FileStream::Seek(position);//定位文件流
         //额外的加密操作...
+        stream->Seek(position);
     }
     virtual void Write(byte data){
         //额外的加密操作...
-        FileStream::Write(data);//写文件流
+        // FileStream::Write(data);//写文件流
         //额外的加密操作...
+        stream->Write(data);
     }
 };
 
-class CryptoNetworkStream : public NetworkStream{
+class CryptoNetworkStream { // : public NetworkStream{
 public:
+
+    // !!!用组合替代继承
+    NetworkStream* stream;
     virtual char Read(int number){
         
         //额外的加密操作...
-        NetworkStream::Read(number);//读网络流
+        // NetworkStream::Read(number);//读网络流
+        stream->Read(number);
     }
     virtual void Seek(int position){
         //额外的加密操作...
-        NetworkStream::Seek(position);//定位网络流
+        // NetworkStream::Seek(position);//定位网络流
         //额外的加密操作...
+        stream->Seek(position);
     }
     virtual void Write(byte data){
         //额外的加密操作...
-        NetworkStream::Write(data);//写网络流
+        // NetworkStream::Write(data);//写网络流
         //额外的加密操作...
+        stream->Write(data);
     }
 };
 
-class CryptoMemoryStream : public MemoryStream{
+class CryptoMemoryStream { // : public MemoryStream{
 public:
+    MemoryStream* stream;
     virtual char Read(int number){
         
         //额外的加密操作...
-        MemoryStream::Read(number);//读内存流
+        // MemoryStream::Read(number);//读内存流
+        stream->Read(number);
     }
     virtual void Seek(int position){
         //额外的加密操作...
-        MemoryStream::Seek(position);//定位内存流
+        // MemoryStream::Seek(position);//定位内存流
         //额外的加密操作...
+        stream->Seek(position);
     }
     virtual void Write(byte data){
         //额外的加密操作...
-        MemoryStream::Write(data);//写内存流
+        // MemoryStream::Write(data);//写内存流
         //额外的加密操作...
+        stream->Write(data);
     }
 };
 

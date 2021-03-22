@@ -2,7 +2,7 @@ class FileSplitter
 {
 	string m_filePath;
 	int m_fileNumber;
-	ProgressBar* m_progressBar;
+	ProgressBar* m_progressBar; // 进度条:这是一个实现细节,即一个容易变化的点
 
 public:
 	FileSplitter(const string& filePath, int fileNumber, ProgressBar* progressBar) :
