@@ -1,3 +1,7 @@
+/**
+ * brief: =decorator_1.5.cpp
+ * 还可以进一步优化
+ */
 //业务操作
 class Stream{
 
@@ -35,7 +39,6 @@ public:
     virtual void Write(char data){
         //写网络流
     }
-    
 };
 
 class MemoryStream :public Stream{
@@ -49,55 +52,55 @@ public:
     virtual void Write(char data){
         //写内存流
     }
-    
 };
 
-//扩展操作
-
-
-class CryptoStream: public Stream {
-    
-    Stream* stream;//...
-
+// Opt: 发现Crypto和Buffered这些"二级功能"的类中有相同的Stream* stream
+// 因此把相同的内容"往上提",设计一个中间类, 即装饰类
+class DecoratorStream: public Stream {
+protected: 
+    Stream* stream;
 public:
-    CryptoStream(Stream* stm):stream(stm){
+    DecoratorStream(Stream* stm):stream(stm) {}
+    virtual char Read(int number);
+    virtual void Seek(int position);
+    virtual void Write(byte data);
+}
+
+//扩展操作
+class CryptoStream: public DecoratorStream { // Opt: public Stream {
+    // Opt: Stream* stream;//...
+public:
+    // Opt: CryptoStream(Stream* stm):stream(stm){
+    CryptoStream(Stream* stm):DecoratorStream(stm){ // 调用上一级基类的构造器
     
     }
-    
     
     virtual char Read(int number){
        
         //额外的加密操作...
-        stream->Read(number);//读文件流
+        stream->Read(number);//读文件流 // 通过组合实现的动态特质
     }
     virtual void Seek(int position){
         //额外的加密操作...
-        stream::Seek(position);//定位文件流
+        stream->Seek(position);//定位文件流
         //额外的加密操作...
     }
     virtual void Write(byte data){
         //额外的加密操作...
-        stream::Write(data);//写文件流
+        stream->Write(data);//写文件流
         //额外的加密操作...
     }
 };
 
-
-
+// 同理
 class BufferedStream : public Stream{
-    
     Stream* stream;//...
-    
 public:
     BufferedStream(Stream* stm):stream(stm){
         
     }
     //...
 };
-
-
-
-
 
 void Process(){
 
@@ -108,7 +111,5 @@ void Process(){
     BufferedStream* s3=new BufferedStream(s1);
     
     BufferedStream* s4=new BufferedStream(s2);
-    
-    
 
 }
