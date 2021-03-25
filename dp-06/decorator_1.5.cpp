@@ -53,7 +53,7 @@ public:
 
 //扩展操作
 // Optx代表优化的步骤x
-// 通过Opt1和Opt2以后发现几个类的类体完全相同
+// 通过Opt1和Opt2以后发现CryptoFileStream/BufferedFileStream的类体完全相同
 // 则Opt3为: 
 class CryptoStream : public Stream {
     Stream* stream;
