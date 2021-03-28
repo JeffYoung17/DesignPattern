@@ -39,8 +39,14 @@
 |  接口隔离模式    |  定义   |  特点    |
 | :-: | :-: | :-: |
 |Facade门面模式|x|x|
-|Proxy代理模式|x|x|
-|Adapter适配器模式|x|x|
+|Proxy代理模式:dp-15|x|x|
+|Adapter适配器模式:dp-16|x|x|
+|Mediator中介模式|x|x|
+
+"状态变化"模式
+|  "状态变化"模式    |  定义   |  特点    |
+| :-: | :-: | :-: |
+|状态模式:dp-18|x|x|
 
 ## Reference
 [C++设计模式](https://www.bilibili.com/video/BV1kW411P7KS?p=3)
